@@ -2,13 +2,7 @@ import { useAppSelector } from "../store"
 import { useCurrentLesson } from "../store/slices/player"
 
 export  function Header() {
-  const {currentModule ,currentLesson} = useAppSelector(state => {
-    const {currentModuleIndex, currentLessonIndex} = state.player 
-    const currentModule = state.player.course?.modules[currentModuleIndex]
-    const currentLesson = currentModule?.lessons[currentLessonIndex]
-    return {currentLesson, currentModule}
-
-  })
+  const {currentModule, currentLesson} = useCurrentLesson()
   const isCourseLoading = useAppSelector(state=> state.player.isLoading)
   
   return (

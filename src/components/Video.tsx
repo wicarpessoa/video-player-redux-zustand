@@ -5,13 +5,7 @@ import { Loader } from 'lucide-react'
 
 export function Video() {
   const dispatch = useAppDispatch()
-    const currentLesson = useAppSelector(state => {
-    const {currentModuleIndex, currentLessonIndex} = state.player 
-    const currentModule = state.player.course?.modules[currentModuleIndex]
-    const currentLesson = currentModule?.lessons[currentLessonIndex]
-    return currentLesson
-
-  })
+  const {currentLesson} = useCurrentLesson()
   const isCourseLoading = useAppSelector(state=> state.player.isLoading)
 
   function handlePlayNext() {

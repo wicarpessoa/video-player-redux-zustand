@@ -14,14 +14,13 @@ export function Module({moduleIndex, title, amountOfLessons}: ModuleProps) {
   const dispatch = useAppDispatch()
 
   const {currentLessonIndex, currentModuleIndex} = useAppSelector(state => {
-    const  currentLessonIndex = state.player.currentLessonIndex
-    const currentModuleIndex = state.player.currentModuleIndex
+    const {currentModuleIndex, currentLessonIndex} = state.player
+
     return { currentLessonIndex, currentModuleIndex}
   })
 
   const lessons = useAppSelector(state => state.player.course?.modules[moduleIndex].lessons)
   return (
-    
     <Collapsible.Root className='group' defaultOpen={moduleIndex === 0}>
     <Collapsible.Trigger className='flex w-full items-center gap-3 bg-zinc-800 p-4'>
       <div className='flex h-10 w-10 rounded-full items-center justify-center bg-zinc-950 text-sm'>

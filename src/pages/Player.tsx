@@ -11,13 +11,7 @@ export function Player() {
   const isCourseLoading = useAppSelector(state=> state.player.isLoading)
 
   const modules = useAppSelector(state => state.player.course?.modules)
-  const  currentLesson  = useAppSelector(state => {
-    const {currentModuleIndex, currentLessonIndex} = state.player 
-    const currentModule = state.player.course?.modules[currentModuleIndex]
-    const currentLesson = currentModule?.lessons[currentLessonIndex]
-    return currentLesson
-
-  })
+  const { currentLesson } = useCurrentLesson()
 
   const dispatch = useAppDispatch();
 
