@@ -2,15 +2,33 @@ import { MessageCircle } from 'lucide-react'
 import { Header } from '../components/Header'
 import { Video   } from '../components/Video'
 import { Module } from '../components/Module'
-import { useAppSelector } from '../store'
+import { useAppDispatch, useAppSelector } from '../store'
 import { useEffect } from 'react'
-import { useCurrentLesson } from '../store/slices/player'
+import { loadCourse, useCurrentLesson } from '../store/slices/player'
+import { ModuleSkeleton } from '../components/ModuleSkeleton'
+
 export function Player() {
-  const modules = useAppSelector(state => state.player.course.modules)
-  const { currentLesson } = useCurrentLesson()
+  const isCourseLoading = useAppSelector(state=> state.player.isLoading)
+
+  const modules = useAppSelector(state => state.player.course?.modules)
+  const  currentLesson  = useAppSelector(state => {
+    const {currentModuleIndex, currentLessonIndex} = state.player 
+    const currentModule = state.player.course?.modules[currentModuleIndex]
+    const currentLesson = currentModule?.lessons[currentLessonIndex]
+    return currentLesson
+
+  })
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(loadCourse())
+  }, [])
+
+  useEffect(() => {
+    if(currentLesson) {
     document.title = `${currentLesson.title}`
+    }
   }, [currentLesson])
 
   return (
@@ -28,7 +46,10 @@ export function Player() {
            <Video/>
           </div>
           <aside className='w-80 absolute top-0 bottom-0 right-0 border-l divide-y-2 divide-zinc-900 border-zinc-800 bg-zinc-900 h overflow-y-scroll scrollbar scrollbar-thin scrollbar-track-zinc-950 scrollbar-thumb-zinc-800 '>
-            { modules.map((module,index) => {
+            {isCourseLoading && 
+              <ModuleSkeleton/>
+            }
+            {modules && modules.map((module,index) => {
               return  <Module key={module.id} moduleIndex={index} title={module.title} amountOfLessons={module.lessons.length}/>
             })}
           </aside>

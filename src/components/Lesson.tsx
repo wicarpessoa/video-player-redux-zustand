@@ -1,6 +1,4 @@
 import {PlayCircle, Video } from 'lucide-react'
-import { useDispatch } from 'react-redux';
-import { play } from '../store/slices/player';
 
 interface LessonProps {
   title: string; 
