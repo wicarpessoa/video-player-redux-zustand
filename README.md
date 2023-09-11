@@ -92,5 +92,3 @@ This project is licensed under the author's own license.
 - Make the application responsive for a better user experience.
 
 ---
-
-Feel free to modify and expand upon this README to include more detailed instructions or any additional information relevant to your application.
