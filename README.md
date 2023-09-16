@@ -78,7 +78,7 @@ The application uses a JSON server to simulate data. The JSON file is included i
 
 ## License
 
-This project is licensed under the author's own license.
+MIT license
 
 ## Contact Information
 
