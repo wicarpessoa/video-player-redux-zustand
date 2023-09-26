@@ -29,7 +29,7 @@ To run the application locally, follow these steps:
 4. Start the JSON server:
 
    ```bash
-   npm run dev
+   npm run server
    ```
    
 5. In a separate terminal, start the development server for the frontend::
